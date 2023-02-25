@@ -1,5 +1,11 @@
 import { DefaultTheme } from "styled-components";
 
-const theme: DefaultTheme = {};
+const theme: DefaultTheme = {
+  basicWidth: "1280px",
+
+  color: {
+    green100: "#21BF48",
+  },
+};
 
 export { theme };
