@@ -26,6 +26,11 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   .sr-out {
     overflow: hidden;
     position: absolute;
