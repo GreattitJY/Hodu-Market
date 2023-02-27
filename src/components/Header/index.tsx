@@ -10,7 +10,11 @@ export default function Header() {
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <LogoImg src={logoImg} alt="호두마켓 로코입니다." />
+        <h1>
+          <Link to="/">
+            <LogoImg src={logoImg} alt="호두마켓 로고입니다." />
+          </Link>
+        </h1>
         <SearchForm action="">
           <input type="text" placeholder="상품을 검색해보세요!" />
           <button type="button">검색</button>
