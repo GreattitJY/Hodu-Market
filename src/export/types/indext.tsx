@@ -1,12 +1,14 @@
 export type Product = {
-  product_id: number;
-  product_name: string;
-  seller: number;
-  seller_store: string;
+  created_at: string;
   image: string;
   price: number;
-  shipping_method: string;
+  product_id: number;
+  product_info: string;
+  product_name: string;
+  seller: number;
   shipping_fee: number;
+  shipping_method: string;
   stock: number;
-  products_info: string;
+  store_name: string;
+  updated_at: string;
 };
