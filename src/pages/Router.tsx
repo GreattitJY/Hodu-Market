@@ -9,7 +9,7 @@ export default function AppRouter() {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route index element={<HomePage />}></Route>
+        <Route path="/" element={<HomePage />}></Route>
         <Route path="/cart" element={<CartPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="*" element={<NotFoundPage />}></Route>
