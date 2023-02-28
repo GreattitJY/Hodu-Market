@@ -6,6 +6,7 @@ const theme: DefaultTheme = {
   color: {
     green100: "#21BF48",
     gray100: "#767676",
+    gray200: "#C4C4C4",
   },
 };
 
