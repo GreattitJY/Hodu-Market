@@ -63,7 +63,7 @@ export default function GetProduct() {
             })
           : null}
       </ProductList>
-      {maxPage ? <PageNation {...{ maxPage }} {...{ setProductsPage }} {...{ data }} /> : null}
+      {maxPage ? <PageNation {...{ maxPage }} {...{ productsPage }} {...{ setProductsPage }} {...{ data }} /> : null}
     </>
   );
 }

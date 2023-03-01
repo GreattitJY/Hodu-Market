@@ -1,8 +1,20 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { PageNationBtnProps } from "../../../../export/interface";
 
-export const ProductPageBtn = styled.button`
-  font-size: 1.4rem;
-  /* margin: 3px; */
+const cssBtn = css`
+  font-size: 1.6rem;
   padding: 3px;
-  /* background-color: #ccc; */
+  color: ${(props) => props.theme.color.gray100};
+`;
+
+export const PageNationContainer = styled.div`
+  button {
+    ${cssBtn}
+  }
+`;
+
+export const PageNumberBtn = styled.button<PageNationBtnProps>`
+  &[data-page="${(props) => props.productsPage}"] {
+    color: ${(props) => props.theme.color.green100};
+  }
 `;

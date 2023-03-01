@@ -1,8 +1,10 @@
 import React from "react";
 import { PageNationProps } from "../../../../export/interface";
-import { ProductPageBtn } from "./PageNationStyle";
+import { PageNationContainer, PageNumberBtn } from "./PageNationStyle";
 
-export default function PageNation({ maxPage, setProductsPage, data }: PageNationProps) {
+export default function PageNation({ maxPage, productsPage, setProductsPage, data }: PageNationProps) {
+  // const [isActive, setIsActive] = useState<boolean>(false);
+
   const handlePrevPage = () => {
     if (!data.previous) return;
 
@@ -16,18 +18,18 @@ export default function PageNation({ maxPage, setProductsPage, data }: PageNatio
   };
 
   return (
-    <>
-      <ProductPageBtn onClick={() => setProductsPage(1)}>&lt;&lt;</ProductPageBtn>
-      <ProductPageBtn onClick={handlePrevPage}>&lt;</ProductPageBtn>
+    <PageNationContainer>
+      <button onClick={() => setProductsPage(1)}>&lt;&lt;</button>
+      <button onClick={handlePrevPage}>&lt;</button>
       {Array(maxPage)
         .fill(0)
         .map((_, i) => (
-          <ProductPageBtn key={i} onClick={() => setProductsPage(i + 1)}>
+          <PageNumberBtn key={i} onClick={() => setProductsPage(i + 1)} {...{ productsPage }} data-page={i + 1}>
             {i + 1}
-          </ProductPageBtn>
+          </PageNumberBtn>
         ))}
-      <ProductPageBtn onClick={handleNextPage}>&gt;</ProductPageBtn>
-      <ProductPageBtn onClick={() => setProductsPage(maxPage)}>&gt;&gt;</ProductPageBtn>
-    </>
+      <button onClick={handleNextPage}>&gt;</button>
+      <button onClick={() => setProductsPage(maxPage)}>&gt;&gt;</button>
+    </PageNationContainer>
   );
 }
