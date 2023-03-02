@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useAxios } from "../../../export/api";
 import { Product } from "../../../export/types/indext";
-import { ProductImg, ProductList, ProductName, ProductPrice, StoreName, TextContainer } from "./GetProductStyle";
+import {
+  // ImgBox,
+  // ImgWrap,
+  ProductImg,
+  ProductList,
+  ProductName,
+  ProductPrice,
+  StoreName,
+  TextContainer,
+} from "./GetProductStyle";
 import PageNation from "./PageNation";
 
 export default function GetProduct() {
@@ -49,7 +58,11 @@ export default function GetProduct() {
           ? products.map((product, idx) => {
               return (
                 <li key={idx}>
+                  {/* <ImgWrap> */}
+                  {/* <ImgBox img={product["image"]}> */}
                   <ProductImg src={product["image"]} alt="" />
+                  {/* </ImgBox>
+                  </ImgWrap> */}
                   <TextContainer>
                     <StoreName>{product["store_name"]}</StoreName>
                     <ProductName>{product["product_name"]}</ProductName>
