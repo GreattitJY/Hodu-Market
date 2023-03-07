@@ -1,5 +1,13 @@
 import React, { useRef, useState } from "react";
-import { LoginContainer, LoginWrap } from "./LoginStyle";
+import {
+  JoinAndPassword,
+  LoginContainer,
+  LoginFieldset,
+  LoginForm,
+  LoginWrap,
+  LogoImg,
+  UserSelectBtn,
+} from "./LoginStyle";
 
 export default function LoginPage() {
   const logoImg = "/assets/images/Logo-hodu.png";
@@ -18,23 +26,27 @@ export default function LoginPage() {
   return (
     <LoginWrap>
       <LoginContainer>
-        <img src={logoImg} alt="" />
-        <article>
-          <div>
-            <button onClick={handleUserLogin} ref={(buyer) => (userBtnRef.current[0] = buyer)}>
-              구매회원 로그인
-            </button>
-            <button onClick={handleUserLogin} ref={(seller) => (userBtnRef.current[1] = seller)}>
-              판매회원 로그인
-            </button>
-          </div>
-          {isBuyer && <p>구매회원 창</p>}
-          {!isBuyer && <p>판매회원 창</p>}
-          <div>
-            <button>회원가입</button>
-            <button>비밀먼호 찾기</button>
-          </div>
-        </article>
+        <LogoImg src={logoImg} alt="" />
+        <UserSelectBtn>
+          <button onClick={handleUserLogin} ref={(buyer) => (userBtnRef.current[0] = buyer)}>
+            구매회원 로그인
+          </button>
+          <button onClick={handleUserLogin} ref={(seller) => (userBtnRef.current[1] = seller)}>
+            판매회원 로그인
+          </button>
+        </UserSelectBtn>
+        <LoginForm>
+          <LoginFieldset>
+            <legend className="sr-out">로그인 아이디 및 비밀번호 입력</legend>
+            <input type="text" placeholder="아이디" />
+            <input type="text" placeholder="비밀번호" />
+            <button>로그인</button>
+          </LoginFieldset>
+        </LoginForm>
+        <JoinAndPassword>
+          <button>회원가입</button>
+          <button>비밀먼호 찾기</button>
+        </JoinAndPassword>
       </LoginContainer>
     </LoginWrap>
   );
