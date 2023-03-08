@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useAxios } from "../../export/api";
 import {
   JoinAndPassword,
   LoginContainer,
@@ -6,6 +7,7 @@ import {
   LoginForm,
   LoginWrap,
   LogoImg,
+  LogoLink,
   UserSelectBtn,
 } from "./LoginStyle";
 
@@ -23,10 +25,20 @@ export default function LoginPage() {
     }
   };
 
+  const { data, error, loading, fetchData } = useAxios({
+    method: "post",
+    url: "accounts/login/",
+    body: {
+      username: "test",
+    },
+  });
+
   return (
     <LoginWrap>
       <LoginContainer>
-        <LogoImg src={logoImg} alt="" />
+        <LogoLink to="/">
+          <LogoImg src={logoImg} alt="" />
+        </LogoLink>
         <UserSelectBtn>
           <button onClick={handleUserLogin} ref={(buyer) => (userBtnRef.current[0] = buyer)}>
             구매회원 로그인

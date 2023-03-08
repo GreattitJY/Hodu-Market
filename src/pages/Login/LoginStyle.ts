@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const LoginWrap = styled.div`
@@ -12,10 +13,13 @@ export const LoginContainer = styled.article`
   flex-direction: column;
 `;
 
+export const LogoLink = styled(Link)`
+  margin: 0 auto 70px;
+`;
+
 export const LogoImg = styled.img`
   width: 238px;
   height: 74px;
-  margin: 0 auto 70px;
 `;
 
 export const UserSelectBtn = styled.div`
@@ -29,7 +33,6 @@ export const UserSelectBtn = styled.div`
     border-bottom: none;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    /* margin-bottom: -10px; */
   }
 `;
 
@@ -38,6 +41,8 @@ export const LoginForm = styled.form`
   /* border-top: none; */
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  /* border-top-right-radius: 10px;
+  border-top-left-radius: 10px; */
   background-color: #fff;
   padding: 34px;
 `;
