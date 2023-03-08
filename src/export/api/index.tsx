@@ -3,7 +3,16 @@ import { useEffect, useState } from "react";
 
 axios.defaults.baseURL = "https://openmarket.weniv.co.kr/";
 
-export const useAxios = (params: AxiosRequestConfig<any>) => {
+type AxiosProps = {
+  method: "get" | "post" | "put" | "delete";
+  url: string;
+  config?: AxiosRequestConfig;
+  body?: {
+    username?: string;
+  };
+};
+
+export const useAxios = (params: AxiosProps) => {
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
