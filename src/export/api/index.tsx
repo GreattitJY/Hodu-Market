@@ -6,10 +6,8 @@ axios.defaults.baseURL = "https://openmarket.weniv.co.kr/";
 type AxiosProps = {
   method: "get" | "post" | "put" | "delete";
   url: string;
+  data?: any;
   config?: AxiosRequestConfig;
-  body?: {
-    username?: string;
-  };
 };
 
 export const useAxios = (params: AxiosProps) => {
@@ -19,9 +17,16 @@ export const useAxios = (params: AxiosProps) => {
 
   const fetchData = async (): Promise<void> => {
     try {
-      const res = await axios.request(params);
-      setData(res.data);
+      if (params.method === "get" || params.method === "delete") {
+        const res = await axios.request(params);
+        setData(res.data);
+      } else {
+        const res = await axios.post(params.url, params.data);
+        setData(res.data);
+      }
     } catch (error) {
+      console.log("useAxios");
+
       setError(error);
       setLoading(false);
     } finally {
