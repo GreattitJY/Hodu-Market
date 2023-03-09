@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import { useAxios } from "../../export/api";
 import {
   JoinAndPassword,
@@ -16,6 +17,7 @@ export default function LoginPage() {
 
   const userBtnRef = useRef<HTMLButtonElement[] | null[]>([]);
   const [isBuyer, setIsBuyer] = useState<boolean>(true);
+  const [isLogin, setIsLogin] = useState();
 
   const handleUserLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (e.target === userBtnRef.current[0]) {
@@ -28,10 +30,55 @@ export default function LoginPage() {
   const { data, error, loading, fetchData } = useAxios({
     method: "post",
     url: "accounts/login/",
-    body: {
-      username: "test",
+    data: {
+      username: "buyer1",
+      password: "hodu0910",
+      login_type: "BUYER",
     },
   });
+
+  useEffect(() => {
+    if (error) {
+      console.log("error", error);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (loading) {
+      // console.log("로딩중입니다.");
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    if (data) {
+      setIsLogin(data);
+    } else {
+    }
+  }, [data]);
+
+  useEffect(() => {
+    console.log(isLogin);
+  }, [isLogin]);
+
+  // const data = {
+  //   username: "buyer1",
+  //   password: "hodu0910",
+  //   login_type: "BUYER",
+  // };
+
+  // const hadnleLogin = async () => {
+  //   try {
+  //     console.log(data);
+  //     const res = await axios.post("https://openmarket.weniv.co.kr/accounts/login/", data);
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   hadnleLogin();
+  // }, []);
 
   return (
     <LoginWrap>
