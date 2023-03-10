@@ -21,7 +21,7 @@ export const useAxios = (params: AxiosProps) => {
         const res = await axios.request(params);
         setData(res.data);
       } else {
-        const res = await axios.post(params.url, params.data);
+        const res = await axios[params.method](params.url, params.data);
         setData(res.data);
       }
     } catch (error) {
