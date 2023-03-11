@@ -6,6 +6,7 @@ axios.defaults.baseURL = "https://openmarket.weniv.co.kr/";
 type AxiosProps = {
   method: "get" | "post" | "put" | "delete";
   url: string;
+  isUpdated?: boolean;
   data?: any;
   config?: AxiosRequestConfig;
 };
@@ -21,6 +22,7 @@ export const useAxios = (params: AxiosProps) => {
         const res = await axios.request(params);
         setData(res.data);
       } else {
+        if (!params.isUpdated) return;
         const res = await axios[params.method](params.url, params.data);
         setData(res.data);
       }
