@@ -16,6 +16,7 @@ export default function LoginPage() {
   const logoImg = "/assets/images/Logo-hodu.png";
 
   const userBtnRef = useRef<HTMLButtonElement[] | null[]>([]);
+  const loginInputRef = useRef<HTMLInputElement[] | null[]>([]);
   const [isBuyer, setIsBuyer] = useState<boolean>(true);
   const [isLogin, setIsLogin] = useState();
 
@@ -26,16 +27,35 @@ export default function LoginPage() {
       setIsBuyer(false);
     }
   };
+  const [isUpdated, setIsUpdated] = useState<boolean>(false);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    debugger;
+    console.log(loginInputRef.current[0]?.value);
+    setIsUpdated(true);
+  };
 
   const { data, error, loading, fetchData } = useAxios({
     method: "post",
     url: "accounts/login/",
+    isUpdated,
     data: {
-      username: "buyer1",
-      password: "hodu0910",
+      // username: "buyer1",
+      // password: "hodu0910",
+      // username: `${isUpdated ? loginInputRef.current[0]?.value : ""}`,
+      username: loginInputRef.current[0]?.value,
+      password: loginInputRef.current[1]?.value,
       login_type: "BUYER",
     },
   });
+
+  useEffect(() => {
+    if (!isUpdated) return;
+    fetchData();
+    setIsUpdated(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isUpdated]);
 
   useEffect(() => {
     if (error) {
@@ -52,33 +72,12 @@ export default function LoginPage() {
   useEffect(() => {
     if (data) {
       setIsLogin(data);
-    } else {
     }
   }, [data]);
 
   useEffect(() => {
     console.log(isLogin);
   }, [isLogin]);
-
-  // const data = {
-  //   username: "buyer1",
-  //   password: "hodu0910",
-  //   login_type: "BUYER",
-  // };
-
-  // const hadnleLogin = async () => {
-  //   try {
-  //     console.log(data);
-  //     const res = await axios.post("https://openmarket.weniv.co.kr/accounts/login/", data);
-  //     console.log(res);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   hadnleLogin();
-  // }, []);
 
   return (
     <LoginWrap>
@@ -94,11 +93,11 @@ export default function LoginPage() {
             판매회원 로그인
           </button>
         </UserSelectBtn>
-        <LoginForm>
+        <LoginForm onSubmit={handleSubmit}>
           <LoginFieldset>
             <legend className="sr-out">로그인 아이디 및 비밀번호 입력</legend>
-            <input type="text" placeholder="아이디" />
-            <input type="text" placeholder="비밀번호" />
+            <input type="text" placeholder="아이디" ref={(id) => (loginInputRef.current[0] = id)} />
+            <input type="text" placeholder="비밀번호" ref={(password) => (loginInputRef.current[1] = password)} />
             <button>로그인</button>
           </LoginFieldset>
         </LoginForm>
