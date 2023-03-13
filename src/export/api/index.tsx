@@ -27,8 +27,6 @@ export const useAxios = (params: AxiosProps) => {
         setData(res.data);
       }
     } catch (error) {
-      console.log("useAxios");
-
       setError(error);
       setLoading(false);
     } finally {
