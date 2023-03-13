@@ -10,6 +10,7 @@ import {
   LogoImg,
   LogoLink,
   UserSelectBtn,
+  UserSelectBtnContainer,
 } from "./LoginStyle";
 
 export default function LoginPage() {
@@ -31,8 +32,16 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    debugger;
+    if (!loginInputRef.current[0]?.value) {
+      alert("아이디를 입력해주세요.");
+      return;
+    }
+    if (!loginInputRef.current[1]?.value) {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
     console.log(loginInputRef.current[0]?.value);
+    console.log(loginInputRef.current[1]?.value);
     setIsUpdated(true);
   };
 
@@ -46,7 +55,7 @@ export default function LoginPage() {
       // username: `${isUpdated ? loginInputRef.current[0]?.value : ""}`,
       username: loginInputRef.current[0]?.value,
       password: loginInputRef.current[1]?.value,
-      login_type: "BUYER",
+      login_type: `${isBuyer ? "BUYER" : "SELLER"}`,
     },
   });
 
@@ -59,7 +68,10 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (error) {
-      console.log("error", error);
+      console.log(error.response.data);
+      if (error.response.data.FAIL_Message) {
+        alert("로그인 정보가 없습니다.");
+      }
     }
   }, [error]);
 
@@ -71,13 +83,9 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (data) {
-      setIsLogin(data);
+      localStorage.setItem("token", data.token);
     }
   }, [data]);
-
-  useEffect(() => {
-    console.log(isLogin);
-  }, [isLogin]);
 
   return (
     <LoginWrap>
@@ -85,14 +93,14 @@ export default function LoginPage() {
         <LogoLink to="/">
           <LogoImg src={logoImg} alt="" />
         </LogoLink>
-        <UserSelectBtn>
-          <button onClick={handleUserLogin} ref={(buyer) => (userBtnRef.current[0] = buyer)}>
+        <UserSelectBtnContainer>
+          <UserSelectBtn onClick={handleUserLogin} ref={(buyer) => (userBtnRef.current[0] = buyer)} {...{ isBuyer }}>
             구매회원 로그인
-          </button>
-          <button onClick={handleUserLogin} ref={(seller) => (userBtnRef.current[1] = seller)}>
+          </UserSelectBtn>
+          <UserSelectBtn onClick={handleUserLogin} ref={(seller) => (userBtnRef.current[1] = seller)} {...{ isBuyer }}>
             판매회원 로그인
-          </button>
-        </UserSelectBtn>
+          </UserSelectBtn>
+        </UserSelectBtnContainer>
         <LoginForm onSubmit={handleSubmit}>
           <LoginFieldset>
             <legend className="sr-out">로그인 아이디 및 비밀번호 입력</legend>
