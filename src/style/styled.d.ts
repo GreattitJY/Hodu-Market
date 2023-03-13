@@ -9,6 +9,7 @@ declare module "styled-components" {
       gray100: string;
       gray200: string;
       gray300: string;
+      black100: string;
     };
   }
 }

@@ -8,6 +8,7 @@ const theme: DefaultTheme = {
     gray100: "#767676",
     gray200: "#C4C4C4",
     gray300: "#F2F2F2",
+    black100: "#333",
   },
 };
 
