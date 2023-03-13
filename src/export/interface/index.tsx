@@ -10,3 +10,7 @@ export interface PageNationProps {
 export interface PageNationBtnProps {
   productsPage: number;
 }
+
+export interface LoginStyleBtnProps {
+  isBuyer: boolean;
+}
