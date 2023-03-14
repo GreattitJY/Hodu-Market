@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserInfo } from "../../export/types/indext";
 import { HeaderWrapper, HeaderContainer, LogoImg, SearchForm, NavContainer, SellerBtn, BuyerBtn } from "./HeaderStyle";
@@ -9,13 +9,20 @@ export default function Header({ isBuyer }: UserInfo) {
   const userImg = "/assets/images/icon-user.svg";
   const shoppingbagImg = "/assets/images/icon-shopping-bag.svg";
 
-  console.log(isBuyer);
+  const [userInfo, setUserInfo] = useState<undefined | string>(isBuyer);
+
+  const getToken = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (!getToken) setUserInfo(undefined);
+    else setUserInfo(isBuyer);
+  }, [getToken, isBuyer]);
 
   return (
     <HeaderWrapper>
       <HeaderContainer>
         <h1>
-          <Link to="/">
+          <Link to="/" state={{ userInfo }}>
             <LogoImg src={logoImg} alt="호두마켓 로고입니다." />
           </Link>
         </h1>
@@ -28,12 +35,12 @@ export default function Header({ isBuyer }: UserInfo) {
             <img src={cartImg} alt="" />
             <span>장바구니</span>
           </Link>
-          {isBuyer === undefined ? (
+          {userInfo === undefined ? (
             <Link to="/login">
               <img src={userImg} alt="" />
               로그인
             </Link>
-          ) : isBuyer === "BUYER" ? (
+          ) : userInfo === "BUYER" ? (
             <BuyerBtn>
               <img src={userImg} alt="" />
               <span>마이페이지</span>
