@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import { useAxios } from "../../export/api";
 import {
   JoinAndPassword,
@@ -19,7 +19,7 @@ export default function LoginPage() {
   const userBtnRef = useRef<HTMLButtonElement[] | null[]>([]);
   const loginInputRef = useRef<HTMLInputElement[] | null[]>([]);
   const [isBuyer, setIsBuyer] = useState<boolean>(true);
-  const [isLogin, setIsLogin] = useState();
+  const navigate = useNavigate();
 
   const handleUserLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (e.target === userBtnRef.current[0]) {
@@ -40,8 +40,6 @@ export default function LoginPage() {
       alert("비밀번호를 입력해주세요.");
       return;
     }
-    console.log(loginInputRef.current[0]?.value);
-    console.log(loginInputRef.current[1]?.value);
     setIsUpdated(true);
   };
 
@@ -50,9 +48,6 @@ export default function LoginPage() {
     url: "accounts/login/",
     isUpdated,
     data: {
-      // username: "buyer1",
-      // password: "hodu0910",
-      // username: `${isUpdated ? loginInputRef.current[0]?.value : ""}`,
       username: loginInputRef.current[0]?.value,
       password: loginInputRef.current[1]?.value,
       login_type: `${isBuyer ? "BUYER" : "SELLER"}`,
@@ -84,7 +79,11 @@ export default function LoginPage() {
   useEffect(() => {
     if (data) {
       localStorage.setItem("token", data.token);
+      navigate("/", {
+        state: { isBuyer: `${isBuyer ? "BUYER" : "SELLER"}` },
+      });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
