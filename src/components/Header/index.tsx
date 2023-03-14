@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HeaderWrapper, HeaderContainer, LogoImg, SearchForm, NavContainer } from "./HeaderStyle";
+import { UserInfo } from "../../export/types/indext";
+import { HeaderWrapper, HeaderContainer, LogoImg, SearchForm, NavContainer, SellerBtn, BuyerBtn } from "./HeaderStyle";
 
-export default function Header() {
+export default function Header({ isBuyer }: UserInfo) {
   const logoImg = "/assets/images/Logo-hodu.png";
   const cartImg = "/assets/images/icon-shopping-cart.svg";
   const userImg = "/assets/images/icon-user.svg";
+  const shoppingbagImg = "/assets/images/icon-shopping-bag.svg";
+
+  console.log(isBuyer);
 
   return (
     <HeaderWrapper>
@@ -22,12 +26,24 @@ export default function Header() {
         <NavContainer>
           <Link to="/cart">
             <img src={cartImg} alt="" />
-            장바구니
+            <span>장바구니</span>
           </Link>
-          <Link to="/login">
-            <img src={userImg} alt="" />
-            로그인
-          </Link>
+          {isBuyer === undefined ? (
+            <Link to="/login">
+              <img src={userImg} alt="" />
+              로그인
+            </Link>
+          ) : isBuyer === "BUYER" ? (
+            <BuyerBtn>
+              <img src={userImg} alt="" />
+              <span>마이페이지</span>
+            </BuyerBtn>
+          ) : (
+            <SellerBtn>
+              <img src={shoppingbagImg} alt="" />
+              <span>판매자 센터</span>
+            </SellerBtn>
+          )}
         </NavContainer>
       </HeaderContainer>
     </HeaderWrapper>

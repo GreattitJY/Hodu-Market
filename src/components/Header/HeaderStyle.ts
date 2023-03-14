@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const HeaderWrapper = styled.header`
   padding: 22px;
@@ -22,6 +22,10 @@ export const SearchForm = styled.form`
   margin-left: 30px;
   margin-right: auto;
 
+  @media screen and (max-width: 800px) {
+    margin-left: 15px;
+  }
+
   input {
     width: 400px;
     border: 2px solid ${({ theme }) => theme.color.green100};
@@ -29,7 +33,7 @@ export const SearchForm = styled.form`
     padding: 13px 50px 13px 13px;
     font-size: 1.6rem;
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 800px) {
       max-width: 200px;
     }
   }
@@ -46,23 +50,83 @@ export const SearchForm = styled.form`
   }
 `;
 
+const HeaderBtnCSS = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: ${({ theme }) => theme.color.gray100};
+  font-size: 12px;
+  font-weight: 400;
+  img {
+    width: 28px;
+    height: 28px;
+  }
+`;
+
+const ScreenOutCSS = css`
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  text-indent: 0;
+`;
+
 export const NavContainer = styled.nav`
   display: flex;
   gap: 26px;
   flex-shrink: 0;
 
   a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    color: ${({ theme }) => theme.color.gray100};
-    font-size: 12px;
-    font-weight: 400;
+    ${HeaderBtnCSS}
 
-    img {
-      width: 28px;
-      height: 28px;
+    @media screen and (max-width: 600px) {
+      padding: 10px 0;
+      span {
+        ${ScreenOutCSS}
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    gap: 12px;
+  }
+`;
+
+export const BuyerBtn = styled.button`
+  ${HeaderBtnCSS}
+  @media screen and (max-width: 600px) {
+    padding: 10px 0;
+    span {
+      ${ScreenOutCSS}
+    }
+  }
+`;
+
+export const SellerBtn = styled.button`
+  display: flex;
+  background-color: ${({ theme }) => theme.color.green100};
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  gap: 12px;
+  padding: 0px 14px;
+  border-radius: 5px;
+
+  img {
+    width: 28px;
+    height: 28px;
+  }
+
+  span {
+    margin-top: 4px;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 0 10px;
+    span {
+      ${ScreenOutCSS}
     }
   }
 `;
