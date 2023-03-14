@@ -12,3 +12,7 @@ export type Product = {
   store_name: string;
   updated_at: string;
 };
+
+export type UserInfo = {
+  isBuyer: undefined | string;
+};
