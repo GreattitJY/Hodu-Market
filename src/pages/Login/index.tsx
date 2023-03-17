@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { useAxios } from "../../export/api";
 import {
   JoinAndPassword,
@@ -109,7 +110,7 @@ export default function LoginPage() {
           </LoginFieldset>
         </LoginForm>
         <JoinAndPassword>
-          <button>회원가입</button>
+          <Link to="/signup">회원가입</Link>
           <button>비밀먼호 찾기</button>
         </JoinAndPassword>
       </LoginContainer>
