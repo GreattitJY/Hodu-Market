@@ -4,7 +4,7 @@ import NotFoundPage from "./404";
 import CartPage from "./Cart";
 import HomePage from "./Home";
 import LoginPage from "./Login";
-import SignupPage from "./Signup";
+import SignupPage from "./Login/Signup";
 
 export default function AppRouter() {
   return (
