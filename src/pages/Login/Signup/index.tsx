@@ -43,25 +43,25 @@ export default function Signup() {
             <legend className="sr-out">회원 정보 입력</legend>
 
             <label htmlFor="id">아이디</label>
-            <input type="text" name="id" />
+            <input type="text" id="id" />
             <button>중복확인</button>
 
             <label htmlFor="password">비밀번호</label>
-            <input type="text" name="password" />
+            <input type="text" id="password" name="password" />
 
             <label htmlFor="passwordCheck">비밀번호 재확인</label>
-            <input type="text" name="passwordCheck" />
+            <input type="text" id="passwordCheck" name="passwordCheck" />
 
             <label htmlFor="name">이름</label>
-            <input type="text" name="name" />
+            <input type="text" id="name" name="name" />
 
             <label htmlFor="phone">휴대폰번호</label>
-            <input type="text" name="phone" />
+            <input type="text" id="phone" name="phone" />
             <input type="text" name="phone" />
             <input type="text" name="phone" />
 
             <label htmlFor="mail">이메일</label>
-            <input type="text" name="mail" />
+            <input type="text" id="mail" name="mail" />
             <span>@</span>
             <input type="text" name="mail" />
           </SignupFieldset>
